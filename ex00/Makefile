@@ -1,4 +1,4 @@
-TARGET =
-SRCS = *.cpp
+TARGET = ex00
+SRCS = Bureaucrat.cpp main.cpp
 
 include ../template.mk

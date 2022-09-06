@@ -1,5 +1,12 @@
 #include "Bureaucrat.hpp"
 
+const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
+	return "[ * EXCEPTION * ] Grade is too HIGH";
+}
+const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
+	return "[ * EXCEPTION * ] Grade is too LOW";
+}
+
 Bureaucrat::Bureaucrat( void ) : name( "UnNamed" ), grade( LOWEST ) {
 	std::cout << "Bureaucrat Default Constructor Called" << std::endl;
 }
@@ -28,12 +35,8 @@ Bureaucrat::~Bureaucrat( void ) {
 	std::cout << getName() << " Bureaucrat Destructor Called " << std::endl;
 }
 
-std::string Bureaucrat::getName() const {
-	return name;
-}
-int Bureaucrat::getGrade() const {
-	return grade;
-}
+std::string Bureaucrat::getName() const { return name; }
+int Bureaucrat::getGrade() const { return grade; }
 
 void Bureaucrat::promoteGrade( void ) {
 	if ( HIGHEST < grade ) {
@@ -52,11 +55,14 @@ void Bureaucrat::demoteGrade( void ) {
 		throw GradeTooLowException();
 }
 
-const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
-	return "[ * EXCEPTION * ] Grade is too HIGH";
-}
-const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
-	return "[ * EXCEPTION * ] Grade is too LOW";
+void Bureaucrat::signForm( Form &form ) const {
+	try {
+		form.beSigned( *this );
+		std::cout << name << " signed " << form.getName() << std::endl;
+	} catch ( std::exception &e ) {
+		std::cout << name << " couldn't signed " << form.getName()
+				  << " because " << e.what() << std::endl;
+	}
 }
 
 std::ostream &operator<<( std::ostream &os, const Bureaucrat &b ) {

@@ -14,17 +14,24 @@ Form::Form( void )
 	: name( "UnNamed" ),
 	  signFlag( false ),
 	  signGrade( LOWEST ),
-	  executeGrade( LOWEST ) {}
+	  executeGrade( LOWEST ) {
+}
 Form::Form( std::string name, int signGrade, int executeGrade )
 	: name( name ),
 	  signFlag( false ),
 	  signGrade( signGrade ),
-	  executeGrade( executeGrade ) {}
+	  executeGrade( executeGrade ) {
+	if ( signGrade < HIGHEST || executeGrade < HIGHEST )
+		throw GradeTooHighException();
+	else if ( LOWEST < signGrade || LOWEST < executeGrade )
+		throw GradeTooLowException();
+}
 Form::Form( Form const &ref )
 	: name( ref.name ),
 	  signFlag( ref.signFlag ),
 	  signGrade( ref.signGrade ),
-	  executeGrade( ref.executeGrade ) {}
+	  executeGrade( ref.executeGrade ) {
+}
 Form &Form::operator=( Form const &ref ) {
 	if ( this != &ref ) {
 		const_cast<std::string &>( name ) = ref.name;
@@ -34,12 +41,22 @@ Form &Form::operator=( Form const &ref ) {
 	}
 	return *this;
 }
-Form::~Form( void ) { std::cout << "Form Delete " << std::endl; }
+Form::~Form( void ) {
+	std::cout << "Form Delete " << std::endl;
+}
 
-const std::string &Form::getName( void ) const { return name; }
-bool Form::isSigned( void ) const { return signFlag; }
-int Form::getSigneGrade( void ) const { return signGrade; }
-int Form::getExecuteGrade( void ) const { return executeGrade; }
+const std::string &Form::getName( void ) const {
+	return name;
+}
+bool Form::isSigned( void ) const {
+	return signFlag;
+}
+int Form::getSigneGrade( void ) const {
+	return signGrade;
+}
+int Form::getExecuteGrade( void ) const {
+	return executeGrade;
+}
 void Form::beSigned( const Bureaucrat &b ) {
 	if ( signFlag == true )
 		throw AlreadySignedException();

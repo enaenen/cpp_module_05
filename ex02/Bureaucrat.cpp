@@ -8,10 +8,10 @@ const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
 }
 
 Bureaucrat::Bureaucrat( void ) : name( "UnNamed" ), grade( LOWEST ) {
-	std::cout << "Bureaucrat Default Constructor Called" << std::endl;
+	// std::cout << "Bureaucrat Default Constructor Called" << std::endl;
 }
 Bureaucrat::Bureaucrat( std::string name, int grade ) : name( name ) {
-	std::cout << "Bureaucrat (string, int) Constructor Called" << std::endl;
+	// std::cout << "Bureaucrat (string, int) Constructor Called" << std::endl;
 	if ( grade < HIGHEST )
 		throw GradeTooHighException();
 	else if ( LOWEST < grade )
@@ -23,7 +23,7 @@ Bureaucrat::Bureaucrat( const Bureaucrat &ref ) {
 	*this = ref;
 }
 Bureaucrat &Bureaucrat::operator=( const Bureaucrat &ref ) {
-	std::cout << "Bureaucrat Copy Operator Called " << std::endl;
+	// std::cout << "Bureaucrat Copy Operator Called " << std::endl;
 	if ( this != &ref ) {
 		const_cast<std::string &>( name ) = ref.name;
 		grade = ref.getGrade();
@@ -32,11 +32,15 @@ Bureaucrat &Bureaucrat::operator=( const Bureaucrat &ref ) {
 }
 
 Bureaucrat::~Bureaucrat( void ) {
-	std::cout << getName() << " Bureaucrat Destructor Called " << std::endl;
+	// std::cout << getName() << " Bureaucrat Destructor Called " << std::endl;
 }
 
-std::string Bureaucrat::getName() const { return name; }
-int Bureaucrat::getGrade() const { return grade; }
+std::string Bureaucrat::getName() const {
+	return name;
+}
+int Bureaucrat::getGrade() const {
+	return grade;
+}
 
 void Bureaucrat::promoteGrade( void ) {
 	if ( HIGHEST < grade ) {
@@ -61,6 +65,16 @@ void Bureaucrat::signForm( Form &form ) const {
 		std::cout << name << " signed " << form.getName() << std::endl;
 	} catch ( std::exception &e ) {
 		std::cout << name << " couldn't signed " << form.getName()
+				  << " because " << e.what() << std::endl;
+	}
+}
+
+void Bureaucrat::executeForm( Form const &form ) const {
+	try {
+		form.execute( *this );
+		std::cout << getName() << " executed " << form.getName() << std::endl;
+	} catch ( std::exception &e ) {
+		std::cout << getName() << "couldn't execute " << form.getName()
 				  << " because " << e.what() << std::endl;
 	}
 }

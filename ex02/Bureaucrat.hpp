@@ -4,8 +4,8 @@
 #include <exception>
 #include "Form.hpp"
 
-#define LOWEST 150
 #define HIGHEST 1
+#define LOWEST 150
 
 class Form;
 
@@ -37,5 +37,6 @@ class Bureaucrat {
 	void demoteGrade( void );
 
 	void signForm( Form &form ) const;
+	void executeForm( Form const &form ) const;
 };
 std::ostream &operator<<( std::ostream &os, const Bureaucrat &b );

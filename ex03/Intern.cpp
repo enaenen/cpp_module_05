@@ -13,6 +13,16 @@ Intern &Intern::operator=( const Intern &ref ) {
 }
 Intern::~Intern( void ) {}
 
+Form *Intern::presidential( const std::string &target ) {
+	return new PresidentialPardonForm( target );
+}
+Form *Intern::robotomy( const std::string &target ) {
+	return new RobotomyRequestForm( target );
+}
+Form *Intern::shrubbery( const std::string &target ) {
+	return new ShrubberyCreationForm( target );
+}
+
 Form *Intern::makeForm( const std::string &form, const std::string &target ) {
 	static const std::string forms[3] = {
 		"presidential pardon", "robotomy request", "shrubbery creation" };
@@ -28,14 +38,4 @@ Form *Intern::makeForm( const std::string &form, const std::string &target ) {
 		throw WrongFormException();
 	std::cout << "Intern creats " << form << std::endl;
 	return ( this->*formFunc[i] )( target );
-}
-
-Form *Intern::presidential( const std::string &target ) {
-	return new PresidentialPardonForm( target );
-}
-Form *Intern::robotomy( const std::string &target ) {
-	return new RobotomyRequestForm( target );
-}
-Form *Intern::shrubbery( const std::string &target ) {
-	return new ShrubberyCreationForm( target );
 }

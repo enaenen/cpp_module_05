@@ -31,6 +31,11 @@ class Form {
 		const char *what( void ) const throw();
 	};
 
+	class FileControlException : public std::exception {
+	   public:
+		const char *what( void ) const throw();
+	};
+
 	Form( void );
 	Form( std::string name, int signGrade, int executeGrade );
 	Form( Form const &ref );

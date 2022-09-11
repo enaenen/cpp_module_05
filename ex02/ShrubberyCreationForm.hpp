@@ -15,5 +15,5 @@ class ShrubberyCreationForm : public Form {
 	ShrubberyCreationForm& operator=( const ShrubberyCreationForm& ref );
 	virtual ~ShrubberyCreationForm( void );
 
-	virtual void execute( Bureaucrat const& b );
+	virtual void execute( Bureaucrat const& b ) const;
 };

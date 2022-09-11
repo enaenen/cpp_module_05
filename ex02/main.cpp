@@ -7,10 +7,13 @@ int main( void ) {
 	{
 		std::cout << "PresidentialPardonFormTest ========================"
 				  << std::endl;
+		Bureaucrat admin( "ADMIN", 1 );
 		Bureaucrat b1( "a", 5 );
-		RobotomyRequestForm aForm( "abcd" );
+		Bureaucrat nobody( "NOBODY", 150 );
+		PresidentialPardonForm aForm( "PPF_FORM" );
 
-		b1.signForm( aForm );
-		b1.executeForm( aForm );
+		admin.signForm( aForm );
+		admin.executeForm( aForm );
+		nobody
 	}
 }

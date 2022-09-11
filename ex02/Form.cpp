@@ -12,13 +12,15 @@ const char *Form::AlreadySignedException::what( void ) const throw() {
 const char *Form::NotSignedException::what( void ) const throw() {
 	return "Form is not Signed";
 }
+const char *Form::FileControlException::what( void ) const throw() {
+	return "Invalid file";
+}
 
 Form::Form( void )
 	: name( "UnNamed" ),
 	  signFlag( false ),
 	  signGrade( LOWEST ),
-	  executeGrade( LOWEST ) {
-}
+	  executeGrade( LOWEST ) {}
 Form::Form( std::string name, int signGrade, int executeGrade )
 	: name( name ),
 	  signFlag( false ),
@@ -33,8 +35,7 @@ Form::Form( Form const &ref )
 	: name( ref.name ),
 	  signFlag( ref.signFlag ),
 	  signGrade( ref.signGrade ),
-	  executeGrade( ref.executeGrade ) {
-}
+	  executeGrade( ref.executeGrade ) {}
 Form &Form::operator=( Form const &ref ) {
 	if ( this != &ref ) {
 		const_cast<std::string &>( name ) = ref.name;
@@ -48,25 +49,15 @@ Form::~Form( void ) {
 	// std::cout << "Form Delete " << std::endl;
 }
 
-const std::string &Form::getName( void ) const {
-	return name;
-}
-bool Form::isSigned( void ) const {
-	return signFlag;
-}
-int Form::getSigneGrade( void ) const {
-	return signGrade;
-}
-int Form::getExecuteGrade( void ) const {
-	return executeGrade;
-}
+const std::string &Form::getName( void ) const { return name; }
+bool Form::isSigned( void ) const { return signFlag; }
+int Form::getSigneGrade( void ) const { return signGrade; }
+int Form::getExecuteGrade( void ) const { return executeGrade; }
 
 void Form::setName( std::string name ) {
 	const_cast<std::string &>( this->name ) = name;
 }
-void Form::setSignFlag( bool signFlag ) {
-	this->signFlag = signFlag;
-}
+void Form::setSignFlag( bool signFlag ) { this->signFlag = signFlag; }
 void Form::setSignGrade( int signGrade ) {
 	const_cast<int &>( this->signGrade ) = signGrade;
 }

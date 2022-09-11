@@ -35,12 +35,8 @@ Bureaucrat::~Bureaucrat( void ) {
 	// std::cout << getName() << " Bureaucrat Destructor Called " << std::endl;
 }
 
-std::string Bureaucrat::getName() const {
-	return name;
-}
-int Bureaucrat::getGrade() const {
-	return grade;
-}
+std::string Bureaucrat::getName() const { return name; }
+int Bureaucrat::getGrade() const { return grade; }
 
 void Bureaucrat::promoteGrade( void ) {
 	if ( HIGHEST < grade ) {
@@ -71,8 +67,8 @@ void Bureaucrat::signForm( Form &form ) const {
 
 void Bureaucrat::executeForm( Form const &form ) const {
 	try {
-		form.execute( *this );
 		std::cout << getName() << " executed " << form.getName() << std::endl;
+		form.execute( *this );
 	} catch ( std::exception &e ) {
 		std::cout << getName() << "couldn't execute " << form.getName()
 				  << " because " << e.what() << std::endl;

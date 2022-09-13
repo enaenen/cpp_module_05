@@ -34,7 +34,7 @@ void ShrubberyCreationForm::execute( Bureaucrat const& b ) const {
 	if ( ifs.fail() || ifs.bad() )
 		throw Form::FileControlException();
 	ofs.open( fileName.c_str() );
-	if ( ofs.fail() || ofs.fail() )
+	if ( ofs.fail() || ofs.bad() )
 		throw Form::FileControlException();
 	std::string input;
 	while ( true ) {
